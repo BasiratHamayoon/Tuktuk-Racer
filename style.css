@@ -56,3 +56,30 @@ body{
     background: linear-gradient(#000, transparent);
     opacity: 0.5;
 }
+img{
+    position: absolute;
+    margin-left: 400px;
+    z-index: 10;
+}
+#truck{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 50px;
+    animation: walk 12s linear infinite;
+    z-index: 11;
+}
+@keyframes walk {
+    
+    0% {
+      transform: translateX(calc(75vw + 100px)); /* Move off to the right */
+      opacity: 0;
+    }
+    8%{
+        opacity: 1;
+    }
+    100% {
+      transform: translateX(0); /* Loop back to starting position */
+    }
+  }
