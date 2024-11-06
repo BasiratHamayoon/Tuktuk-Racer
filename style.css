@@ -83,3 +83,25 @@ img{
       transform: translateX(0); /* Loop back to starting position */
     }
   }
+  #van{
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 80px; 
+    width: 100px;
+    height: 100px;
+    animation: van 23s linear infinite;
+    z-index: 1;
+ }
+ @keyframes van {
+    
+    0% {
+      transform: translateX(calc(75vw + 100px)); /* Move off to the right */
+      opacity: 0;
+    }
+    8%{
+        opacity: 1;
+    }
+    100% {
+      transform: translateX(0); /* Loop back to starting position */
+    }
+  }
