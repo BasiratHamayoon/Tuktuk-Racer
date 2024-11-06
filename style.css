@@ -3,7 +3,25 @@ body{
     padding: 0;
     margin: 0;
     /* background: radial-gradient(#929cdf, #1f59eb) */
+    animation: changeColor 10s infinite;
 }
+@keyframes changeColor {
+    0% {
+      background-color: #FF6347; /* Tomato */
+    }
+    25% {
+      background-color: #FFD700; /* Gold */
+    }
+    50% {
+      background-color: #32CD32; /* Lime Green */
+    }
+    75% {
+      background-color: #1E90FF; /* Dodger Blue */
+    }
+    100% {
+      background-color: #FF6347; /* Tomato again */
+    }
+  }
 .Road-Container{
     position: relative;
     width: 95%;
