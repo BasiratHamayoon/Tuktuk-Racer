@@ -46,3 +46,13 @@ body{
     transform-origin: top;
     transform: perspective(500px) rotateX(-25deg);
 }
+.Shedow{
+    position: absolute;
+    bottom: -93px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    height: 60px;
+    background: linear-gradient(#000, transparent);
+    opacity: 0.5;
+}
