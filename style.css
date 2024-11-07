@@ -127,3 +127,89 @@ img{
       transform: translateX(0); /* Loop back to starting position */
     }
   }
+  #gameOver{
+    width: 250px;
+    height: 210px;
+    position: absolute;
+    color: rgb(255, 255, 255);
+    background-color: #1d9b1d;
+    margin-left: 530px;
+    margin-top: -170px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 12;
+    box-shadow: 0px 0px 10px black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    animation: changeColor 10s infinite;
+    display: none;
+    
+   
+    animation: smokeEffect 3s ease-in-out infinite;
+  }
+  @keyframes smokeEffect {
+    0% {
+        /* At start, no smoke rising. Add box-shadow glow, start with small scale */
+        border-color: transparent;
+        box-shadow: 
+            0 0 5px rgba(255, 99, 71, 0.87), /* Tomato at the edges */
+            0 0 10px rgba(50, 205, 50, 0.822), /* Lime Green */
+            0 0 15px rgba(30, 143, 255, 0.788); /* Dodger Blue */
+        transform: scale(1) translateY(0); /* Default scale and position */
+    }
+    25% {
+        /* At 25%, start showing more glow and give a slight jump */
+        border-color: rgba(255, 99, 71, 0.8);
+        box-shadow: 
+            0 0 15px rgba(50, 205, 50, 0.877), /* Lime Green glow */
+            0 0 25px rgba(30, 144, 255, 0.6); /* Slight Blue glow */
+        transform: scale(1.05) translateY(-10px); /* Jump upwards slightly */
+    }
+    50% {
+        /* At 50%, the glow intensifies and the box-shadow is larger */
+        border-color: rgba(50, 205, 50, 0.8); /* Lime Green */
+        box-shadow:
+            0 0 30px rgba(50, 205, 50, 0.911), /* Bright Lime Green */
+            0 0 50px rgba(30, 144, 255, 0.6); /* Bright Blue */
+        transform: scale(1) translateY(0); /* Further jump up */
+    }
+    75% {
+        /* At 75%, the color shifts, and box-shadow becomes even larger */
+        border-color: rgba(30, 144, 255, 0.8); /* Dodger Blue */
+        box-shadow: 
+            0 0 50px rgba(47, 214, 47, 0.863), /* Fading Lime Green */
+            0 0 70px rgba(30, 144, 255, 0.8); /* Faded Blue */
+        transform: scale(1.05) translateY(-10px); /* Slightly less of a jump */
+    }
+    100% {
+        /* Back to original state with faded shadow and slightly smaller scale */
+        border-color: rgba(255, 99, 71, 0.5); /* Tomato fades back */
+        box-shadow: 
+            0 0 70px rgba(50, 205, 50, 0.829), /* Faded Lime Green */
+            0 0 100px rgba(30, 144, 255, 0.6); /* Faded Blue */
+        transform: scale(1) translateY(0); /* Back to normal size and position */
+    }
+}
+  
+  #gameOver h3{
+    font-size: 25px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  #gameOver button{
+    width: 150px;
+    height: 40px;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 10px;
+    background-color: #494444;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  #gameOver button:hover{
+    background-color: #201f1f;
+  }
+  #gameOver p{
+    margin: 0;
+    padding: 0;
+  }
