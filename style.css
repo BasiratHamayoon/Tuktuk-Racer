@@ -88,7 +88,9 @@ img{
     margin-left: 50px;
     animation: walk 12s linear infinite;
     z-index: 11;
+    animation-play-state: running; /* Ensure the animation runs initially */
 }
+
 @keyframes walk {
     
     0% {
@@ -110,7 +112,8 @@ img{
     height: 100px;
     animation: van 23s linear infinite;
     z-index: 1;
- }
+    animation-play-state: running; /* Ensure the animation runs initially */
+}
  @keyframes van {
     
     0% {
