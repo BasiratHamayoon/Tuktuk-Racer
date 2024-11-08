@@ -1,13 +1,13 @@
-// Select the elements
 const tuktuk = document.getElementById('tuktuk');
 const van = document.getElementById('van');
 const truck = document.getElementById('truck');
-var gameOverDiv = document.getElementById('gameOver');
+const gameOverDiv = document.getElementById('gameOver');
 
 // Define initial position for the tuktuk
 let tuktukPosition = 0; // 0 means on the left side of the road
 const laneHeight = 150;  // Height of one lane in pixels (adjust as needed)
 const roadHeight = 160; // Total height of the road container (use your actual height here)
+let tuktukSide = 'left'; // Track which side the tuktuk is on: 'left' or 'right'
 
 // Flag to track if the game is over
 let gameOverFlag = false;
@@ -25,20 +25,19 @@ function isColliding(element1, element2) {
 
 // Function to stop animations and show the Game Over alert
 function gameOver() {
-    // Prevent multiple alerts by checking the gameOverFlag
-    if (gameOverFlag) return;
-    
-    gameOverFlag = true;  // Set the flag to true to prevent further game over triggers
+    if (gameOverFlag) return; // Prevent multiple game over alerts
+
+    gameOverFlag = true; // Set the flag to prevent further game overs
 
     // Stop animations by pausing their animation-play-state
     van.style.animationPlayState = 'paused';
     truck.style.animationPlayState = 'paused';
-    
+
     // Show the game over alert
     gameOverDiv.style.display = "block";
 }
 
-// Move the tuktuk up to avoid collision
+// Move the tuktuk up (when vehicle and tuktuk are on the same side)
 function moveTuktukUp() {
     if (tuktukPosition > 0) {
         tuktukPosition -= laneHeight; // Move the tuktuk up by one lane
@@ -46,7 +45,7 @@ function moveTuktukUp() {
     }
 }
 
-// Move the tuktuk down to avoid collision
+// Move the tuktuk down (when vehicle and tuktuk are on the same side)
 function moveTuktukDown() {
     if (tuktukPosition < roadHeight - laneHeight) { 
         tuktukPosition += laneHeight; // Move the tuktuk down by one lane
@@ -54,27 +53,55 @@ function moveTuktukDown() {
     }
 }
 
-// Function to check the tuktuk's collision with the van
+// Function to check if the tuktuk is aligned with the van or truck
+function checkAlignment() {
+    const vanRect = van.getBoundingClientRect();
+    const truckRect = truck.getBoundingClientRect();
+    const tuktukRect = tuktuk.getBoundingClientRect();
+
+    const vanTop = vanRect.top;
+    const truckTop = truckRect.top;
+    const tuktukTop = tuktukRect.top;
+
+    // If the tuktuk and van are on the same lane (same top position)
+    if (Math.abs(vanTop - tuktukTop) <= 1) {
+        return 'van';
+    }
+
+    // If the tuktuk and truck are on the same lane (same top position)
+    if (Math.abs(truckTop - tuktukTop) <= 1) {
+        return 'truck';
+    }
+
+    return null; // No alignment
+}
+
+// Check for collision when the tuktuk is aligned with either van or truck
 function checkCollisions() {
-    // Check if the tuktuk is in the same lane as the van
-    if (isColliding(tuktuk, van)) {
-        if (tuktukPosition === 0) { // If the tuktuk is on the same side as the van
-            gameOver(); // Game Over
-        } else {
-            // The tuktuk is on the other side, no collision, game continues
-            console.log("Tuktuk is safe, continue playing.");
-        }
+    const alignment = checkAlignment(); // Check alignment of tuktuk with van or truck
+
+    if (alignment === 'van' && isColliding(tuktuk, van)) {
+        gameOver(); // Stop the game if tuktuk collides with van
+    } 
+    else if (alignment === 'truck' && isColliding(tuktuk, truck)) {
+        gameOver(); // Stop the game if tuktuk collides with truck
     }
 }
 
-// Listen for key presses to move the tuktuk (for manual movement)
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'ArrowUp') {
-        moveTuktukUp(); // Move the tuktuk up (avoid collision)
-    } else if (event.key === 'ArrowDown') {
-        moveTuktukDown(); // Move the tuktuk down (avoid collision)
+// Double-click event to move the tuktuk up or down based on the vehicle's position
+function handleTuktukDoubleClick() {
+    const alignment = checkAlignment(); // Check if tuktuk is aligned with van or truck
+    
+    if (alignment === 'van') {
+        moveTuktukUp(); // Move the tuktuk up if aligned with van
     }
-});
+    else if (alignment === 'truck') {
+        moveTuktukDown(); // Move the tuktuk down if aligned with truck
+    }
+}
 
 // Run the collision check every 100 milliseconds
 setInterval(checkCollisions, 100);
+
+// Add double-click event listener for the tuktuk
+tuktuk.addEventListener('dblclick', handleTuktukDoubleClick);
