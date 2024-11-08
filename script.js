@@ -89,17 +89,14 @@ function checkCollisions() {
 }
 
 // Double-click event to move the tuktuk up or down based on the vehicle's position
-function handleTuktukDoubleClick() {
-    const alignment = checkAlignment(); // Check if tuktuk is aligned with van or truck
-    
-    if (alignment === 'van') {
-        moveTuktukUp(); // Move the tuktuk up if aligned with van
+tuktuk.style.marginTop = '1px';
+tuktuk.addEventListener('dblclick', function(){
+    if (tuktuk.style.marginTop === '1px'){
+        tuktuk.style.marginTop = '50px';
+    } else {
+        tuktuk.style.marginTop = '1px';
     }
-    else if (alignment === 'truck') {
-        moveTuktukDown(); // Move the tuktuk down if aligned with truck
-    }
-}
-
+});
 // Run the collision check every 100 milliseconds
 setInterval(checkCollisions, 100);
 

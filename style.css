@@ -78,7 +78,7 @@ img{
     position: absolute;
     margin-left: 400px;
     z-index: 10;
-    margin-top: 10px;
+    margin-top: 1px;
 }
 #truck{
     width: 100px;
