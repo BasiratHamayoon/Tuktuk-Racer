@@ -129,23 +129,21 @@ img{
     }
   }
   #gameOver{
-    width: 250px;
-    height: 210px;
+    width: 300px;
+    height: 250px;
     position: absolute;
-    color: rgb(255, 255, 255);
-    background-color: #1d9b1d;
+    background-color: #525252;
+    color: white;
     margin-left: 530px;
-    margin-top: -170px;
+    margin-top: -180px;
     border-radius: 10px;
+    z-index: 13;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
     text-align: center;
-    z-index: 12;
-    box-shadow: 0px 0px 10px black;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
     animation: changeColor 10s infinite;
     display: none;
-    
-   
     animation: smokeEffect 3s ease-in-out infinite;
   }
   @keyframes smokeEffect {
@@ -195,22 +193,54 @@ img{
   #gameOver h3{
     font-size: 25px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 40px;
   }
-  #gameOver button{
-    width: 150px;
-    height: 40px;
-    border: none;
-    outline: none;
-    color: #fff;
-    border-radius: 10px;
-    background-color: #494444;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  #gameOver button:hover{
-    background-color: #201f1f;
+  #criyng{
+    margin: auto;
+    margin-top: 30px;
+    margin-left: -25px;
   }
   #gameOver p{
     margin: 0;
     padding: 0;
+  }
+  .start-container{
+    width: 300px;
+    height: 250px;
+    position: absolute;
+    background-color: #525252;
+    color: white;
+    margin-left: 530px;
+    margin-top: -180px;
+    border-radius: 10px;
+    z-index: 13;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    text-align: center;
+    animation: smokeEffect 3s ease-in-out infinite;
+    /* display: none; */
+  }
+  #startBtn{
+    width: 200px;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    /* background-color: rgb(255, 115, 0); */
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #525252;
+    border: 3px solid rgb(255, 115, 0);
+    margin-top: 10px;
+  }
+  #startBtn:hover{
+    background-color: rgb(255, 115, 0);
+  }
+  .start-container p{
+    padding: 20px;
+    padding-top: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }

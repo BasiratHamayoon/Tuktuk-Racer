@@ -35,6 +35,9 @@ function gameOver() {
 
     // Show the game over alert
     gameOverDiv.style.display = "block";
+
+    // const gameOverSound = document.getElementById('gameOverSound');
+    // gameOverSound.play();
 }
 
 // Move the tuktuk up (when vehicle and tuktuk are on the same side)
@@ -100,5 +103,7 @@ tuktuk.addEventListener('dblclick', function(){
 // Run the collision check every 100 milliseconds
 setInterval(checkCollisions, 100);
 
-// Add double-click event listener for the tuktuk
-tuktuk.addEventListener('dblclick', handleTuktukDoubleClick);
+
+
+
+
