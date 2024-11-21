@@ -219,7 +219,7 @@ img{
     align-items: center; */
     text-align: center;
     animation: smokeEffect 3s ease-in-out infinite;
-    /* display: none; */
+    display: block;
   }
   #startBtn{
     width: 200px;

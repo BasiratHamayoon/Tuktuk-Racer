@@ -2,9 +2,11 @@ const tuktuk = document.getElementById('tuktuk');
 const van = document.getElementById('van');
 const truck = document.getElementById('truck');
 const gameOverDiv = document.getElementById('gameOver');
+const startBtn = document.getElementById('startBtn');
+const startContainer = document.querySelector('.start-container');  // Get the start container
 
 // Define initial position for the tuktuk
-let tuktukPosition = 0; // 0 means on the left side of the road
+let tuktukPosition = 0;  // 0 means on the left side of the road
 const laneHeight = 150;  // Height of one lane in pixels (adjust as needed)
 const roadHeight = 160; // Total height of the road container (use your actual height here)
 let tuktukSide = 'left'; // Track which side the tuktuk is on: 'left' or 'right'
@@ -23,38 +25,65 @@ function isColliding(element1, element2) {
              rect1.top > rect2.bottom);
 }
 
-// Function to stop animations and show the Game Over alert
+// Function to stop all animations
+function stopAllAnimations() {
+    van.style.animation = 'none';
+    truck.style.animation = 'none';
+    tuktuk.style.transition = 'none';  // Stop any transition animation for the tuktuk
+}
+
+// Function to restart all animations
+function startAllAnimations() {
+    van.style.animation = '';  // Restart van animation
+    truck.style.animation = '';  // Restart truck animation
+    tuktuk.style.transition = 'margin-top 0.5s ease';  // Allow smooth transitions for tuktuk
+}
+
+// Function to stop the game and show the game over alert
 function gameOver() {
     if (gameOverFlag) return; // Prevent multiple game over alerts
 
     gameOverFlag = true; // Set the flag to prevent further game overs
 
-    // Stop animations by pausing their animation-play-state
-    van.style.animationPlayState = 'paused';
-    truck.style.animationPlayState = 'paused';
+    // Stop animations
+    stopAllAnimations();
 
     // Show the game over alert
     gameOverDiv.style.display = "block";
-
-    // const gameOverSound = document.getElementById('gameOverSound');
-    // gameOverSound.play();
 }
 
-// Move the tuktuk up (when vehicle and tuktuk are on the same side)
-function moveTuktukUp() {
-    if (tuktukPosition > 0) {
-        tuktukPosition -= laneHeight; // Move the tuktuk up by one lane
-        tuktuk.style.marginTop = `${tuktukPosition}px`;
+// Start Game logic
+function startGame() {
+    // Hide the Start Game container
+    startContainer.style.display = 'none';
+
+    // Reset the gameOverFlag in case the game was restarted
+    gameOverFlag = false;
+
+    // Reset the tuktuk position
+    tuktuk.style.marginTop = '1px'; 
+
+    // Hide the game over message if visible
+    gameOverDiv.style.display = "none"; 
+
+    // Start all animations
+    startAllAnimations();
+
+    // Optionally: Start the game logic for vehicle movement
+    // You can start a loop or setInterval for continuous vehicle movement here, if necessary.
+}
+
+// Add event listener for the Start Game button
+startBtn.addEventListener('click', startGame);
+
+// Double-click event to move the tuktuk up or down based on the vehicle's position
+tuktuk.addEventListener('dblclick', function(){
+    if (tuktuk.style.marginTop === '1px'){
+        tuktuk.style.marginTop = '50px';
+    } else {
+        tuktuk.style.marginTop = '1px';
     }
-}
-
-// Move the tuktuk down (when vehicle and tuktuk are on the same side)
-function moveTuktukDown() {
-    if (tuktukPosition < roadHeight - laneHeight) { 
-        tuktukPosition += laneHeight; // Move the tuktuk down by one lane
-        tuktuk.style.marginTop = `${tuktukPosition}px`;
-    }
-}
+});
 
 // Function to check if the tuktuk is aligned with the van or truck
 function checkAlignment() {
@@ -91,19 +120,8 @@ function checkCollisions() {
     }
 }
 
-// Double-click event to move the tuktuk up or down based on the vehicle's position
-tuktuk.style.marginTop = '1px';
-tuktuk.addEventListener('dblclick', function(){
-    if (tuktuk.style.marginTop === '1px'){
-        tuktuk.style.marginTop = '50px';
-    } else {
-        tuktuk.style.marginTop = '1px';
-    }
-});
 // Run the collision check every 100 milliseconds
 setInterval(checkCollisions, 100);
 
-
-
-
-
+// Initially stop animations when the page loads
+stopAllAnimations();
