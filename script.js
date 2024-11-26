@@ -4,6 +4,7 @@ const truck = document.getElementById('truck');
 const gameOverDiv = document.getElementById('gameOver');
 const startBtn = document.getElementById('startBtn');
 const startContainer = document.querySelector('.start-container');  // Get the start container
+const backgroundOverlay = document.getElementById('backgroundOverlay');  // Get the background overlay
 
 // Define initial position for the tuktuk
 let tuktukPosition = 0;  // 0 means on the left side of the road
@@ -50,6 +51,9 @@ function gameOver() {
 
     // Show the game over alert
     gameOverDiv.style.display = "block";
+
+    // Show the background overlay
+    backgroundOverlay.style.display = "block";
 }
 
 // Start Game logic
@@ -65,6 +69,9 @@ function startGame() {
 
     // Hide the game over message if visible
     gameOverDiv.style.display = "none"; 
+
+    // Hide the background overlay
+    backgroundOverlay.style.display = "none";
 
     // Start all animations
     startAllAnimations();
